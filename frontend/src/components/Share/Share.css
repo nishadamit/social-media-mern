@@ -1,0 +1,55 @@
+.share-container {
+  width: 100%;
+  box-shadow: 0px 2px 18px #0000004a;
+  border-radius: 10px;
+}
+.share-container-wrapper {
+  padding: 2.4rem 3rem;
+}
+.share-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.share-top-input-box {
+  border: none;
+  background-color: #eee;
+  width: 90%;
+  border-radius: 50px;
+  font-size: 1.6rem;
+  padding: 0.9rem 1.8rem;
+}
+.share-horizontal-bar {
+  margin: 2.4rem 0;
+  background-color: #555;
+  margin-left: 2.4rem;
+}
+.share-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-left: 2.4rem;
+}
+.share-icon-list {
+  display: flex;
+  align-items: center;
+  gap: 1.6rem;
+}
+.share-icon-container {
+  display: flex;
+  align-items: center;
+}
+.share-icon {
+  width: 3rem !important;
+  height: 3rem !important;
+}
+.share-icon-text {
+  font-size: 1.4rem;
+}
+.share-button {
+  border: none;
+  background-color: green;
+  padding: 0.5rem 1rem;
+  color: #fff;
+  font-weight: 600;
+}

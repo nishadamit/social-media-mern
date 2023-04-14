@@ -1,0 +1,75 @@
+.header-container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  background-color: #083f87;
+  padding: 1.2rem 2.4rem;
+  gap: 4.8rem;
+  height: 6.4rem;
+}
+.header-left {
+  flex: 3;
+}
+.header-left span {
+  font-size: 3rem;
+  color: #fff;
+  font-weight: 500;
+}
+.header-middle {
+  flex: 6;
+  background-color: #fff;
+  border-radius: 20px;
+  padding: 0.6rem 1rem;
+  display: flex;
+  align-items: center;
+}
+.header-middle .search-icon {
+  height: 2.4rem;
+  width: 2.4rem;
+  cursor: pointer;
+}
+.header-middle .search-input {
+  width: 100%;
+  border: none;
+  font-size: 1.6rem;
+  margin-left: 1.6rem;
+}
+
+.header-right {
+  flex: 5;
+  display: flex;
+  align-items: center;
+  color: #fff;
+  gap: 3rem;
+}
+.header-right .header-links {
+  display: flex;
+  gap: 1.6rem;
+}
+.header-right .header-links span {
+  font-size: 1.6rem;
+}
+
+.header-icons {
+  display: flex;
+  gap: 1.6rem;
+}
+.icon-container {
+  position: relative;
+  cursor: pointer;
+}
+.icon-container .icon {
+  height: 2.4rem;
+  width: 2.4rem;
+}
+.icon-container span {
+  position: absolute;
+  font-size: 1.2rem;
+  background-color: red;
+  height: 1.6rem;
+  width: 1.6rem;
+  border-radius: 50%;
+  left: 80%;
+  top: -20%;
+  padding: 2px 4px;
+}

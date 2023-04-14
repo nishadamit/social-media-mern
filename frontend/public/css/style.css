@@ -1,0 +1,62 @@
+/* 
+--- 01 TYPOGRAPHY SYSTEM 
+-Font Sizes (px)
+ 10 / 12 / 14 / 16 / 18 / 20 / 24 / 30 / 36 / 44 / 52 / 62 / 74 / 86 / 98
+-SPACING SYSTEM (px)
+2 / 4 / 8 / 12 / 16 / 24 / 32 / 48 / 64 / 80 / 96 / 128
+- Font Weights 
+  default: 400
+  Medium: 500
+  Semi-Bold: 600
+  Bold: 700
+- Line Heights
+  Default: 1
+  Small: 1.05
+  Medium: 1.2
+  Paragraph default: 1.6
+- Line Heights
+  -0.5px
+  -0.75px
+--- 02 COLORS
+-Primary: #083F87
+-Tints: #fdf2e9	
+-Shades:#cf711f
+-Accents:
+-Grey: 
+      #767676 
+      #6f6f6f
+      #555 
+      #333
+       
+--- 05 SHADOWS
+--- 06 BORDER-RADIUS
+--- 07 WHITESPACE
+
+*/
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+*:focus {
+  outline: none;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+  color: #555;
+  line-height: 1;
+}
+
+.round-image-3 {
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  object-fit: cover;
+  cursor: pointer;
+}
