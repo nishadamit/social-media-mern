@@ -1,0 +1,60 @@
+.rightbar {
+}
+.right-bar-wrapper {
+  padding: 2.4rem 2.4rem 0 0;
+}
+.birthday-container {
+  display: flex;
+  align-items: center;
+  gap: 1.6rem;
+  margin-bottom: 3.2rem;
+}
+.birthday-container img {
+  width: 3rem;
+  height: 3rem;
+}
+.birthday-container p {
+  font-weight: normal;
+  font-size: 1.6rem;
+}
+.rightbar .ad-image {
+  width: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 3rem;
+}
+.online-friend-container {
+}
+.online-friend-container .online-friend-heading {
+  font-weight: normal;
+  font-size: 1.8rem;
+  font-weight: 500;
+  margin-bottom: 1.6rem;
+}
+.online-friend-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+}
+.online-friend-list .list-item {
+  display: flex;
+  align-items: center;
+  gap: 1.6rem;
+}
+.online-friend-list .list-item .image-container {
+  position: relative;
+}
+.online-friend-list .list-item .image-container .dot {
+  width: 1rem;
+  height: 1rem;
+  background-color: limegreen;
+  position: absolute;
+  top: 0;
+  left: 60%;
+  border-radius: 50%;
+}
+.online-friend-list .list-item span {
+  font-size: 1.6rem;
+  font-weight: normal;
+}

@@ -1,3 +1,4 @@
 .feed-container {
   padding: 2.4rem;
+  overflow-y: scroll;
 }
