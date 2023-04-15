@@ -1,5 +1,7 @@
 import React from "react";
 import "./Rightbar.css";
+import { Users } from "../../dummyData";
+import OnlineUser from "../OnlineUser/OnlineUser";
 
 const Rightbar = () => {
   return (
@@ -16,97 +18,9 @@ const Rightbar = () => {
         <div className="online-friend-container">
           <p className="online-friend-heading">Online Friends</p>
           <ul className="online-friend-list">
-            <li>
-              <div className="list-item">
-                <div className="image-container">
-                  <img
-                    src="assets/person/1.jpeg"
-                    alt="online friend"
-                    className="round-image-4"
-                  />
-                  <div className="dot"></div>
-                </div>
-                <span> John Carter</span>
-              </div>
-            </li>
-            <li>
-              <div className="list-item">
-                <div className="image-container">
-                  <img
-                    src="assets/person/1.jpeg"
-                    alt="online friend"
-                    className="round-image-4"
-                  />
-                  <div className="dot"></div>
-                </div>
-                <span> John Carter</span>
-              </div>
-            </li>
-            <li>
-              <div className="list-item">
-                <div className="image-container">
-                  <img
-                    src="assets/person/1.jpeg"
-                    alt="online friend"
-                    className="round-image-4"
-                  />
-                  <div className="dot"></div>
-                </div>
-                <span> John Carter</span>
-              </div>
-            </li>
-            <li>
-              <div className="list-item">
-                <div className="image-container">
-                  <img
-                    src="assets/person/1.jpeg"
-                    alt="online friend"
-                    className="round-image-4"
-                  />
-                  <div className="dot"></div>
-                </div>
-                <span> John Carter</span>
-              </div>
-            </li>
-            <li>
-              <div className="list-item">
-                <div className="image-container">
-                  <img
-                    src="assets/person/1.jpeg"
-                    alt="online friend"
-                    className="round-image-4"
-                  />
-                  <div className="dot"></div>
-                </div>
-                <span> John Carter</span>
-              </div>
-            </li>
-            <li>
-              <div className="list-item">
-                <div className="image-container">
-                  <img
-                    src="assets/person/1.jpeg"
-                    alt="online friend"
-                    className="round-image-4"
-                  />
-                  <div className="dot"></div>
-                </div>
-                <span> John Carter</span>
-              </div>
-            </li>
-            <li>
-              <div className="list-item">
-                <div className="image-container">
-                  <img
-                    src="assets/person/1.jpeg"
-                    alt="online friend"
-                    className="round-image-4"
-                  />
-                  <div className="dot"></div>
-                </div>
-                <span> John Carter</span>
-              </div>
-            </li>
+            {Users.map((user) => (
+              <OnlineUser key={user?.id} user={user} />
+            ))}
           </ul>
         </div>
       </div>

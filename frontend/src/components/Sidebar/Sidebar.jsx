@@ -11,6 +11,8 @@ import {
   School,
 } from "@mui/icons-material";
 import "./Sidebar.css";
+import { Users } from "../../dummyData";
+import CloseFriend from "../CloseFriend/CloseFriend";
 
 const Sidebar = () => {
   return (
@@ -57,54 +59,9 @@ const Sidebar = () => {
         <button className="sidebar-showmore-button">Show more</button>
         <hr className="sidebar-horizontal-line" />
         <ul className="sidebar-friend-list">
-          <li className="sidebar-friend-list-item">
-            <img
-              src="/assets/person/2.jpeg"
-              alt="friend"
-              className="friend-list-img"
-            />
-            <span className="friend-list-name">John Doe</span>
-          </li>
-          <li className="sidebar-friend-list-item">
-            <img
-              src="/assets/person/2.jpeg"
-              alt="friend"
-              className="friend-list-img"
-            />
-            <span className="friend-list-name">John Doe</span>
-          </li>
-          <li className="sidebar-friend-list-item">
-            <img
-              src="/assets/person/2.jpeg"
-              alt="friend"
-              className="friend-list-img"
-            />
-            <span className="friend-list-name">John Doe</span>
-          </li>
-          <li className="sidebar-friend-list-item">
-            <img
-              src="/assets/person/2.jpeg"
-              alt="friend"
-              className="friend-list-img"
-            />
-            <span className="friend-list-name">John Doe</span>
-          </li>
-          <li className="sidebar-friend-list-item">
-            <img
-              src="/assets/person/2.jpeg"
-              alt="friend"
-              className="friend-list-img"
-            />
-            <span className="friend-list-name">John Doe</span>
-          </li>
-          <li className="sidebar-friend-list-item">
-            <img
-              src="/assets/person/2.jpeg"
-              alt="friend"
-              className="friend-list-img"
-            />
-            <span className="friend-list-name">John Doe</span>
-          </li>
+          {Users.map((user) => (
+            <CloseFriend key={user?.id} user={user} />
+          ))}
         </ul>
       </div>
     </div>
