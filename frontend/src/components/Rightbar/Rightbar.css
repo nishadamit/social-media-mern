@@ -37,3 +37,40 @@
   flex-direction: column;
   gap: 1.6rem;
 }
+.profile-right-bar {
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+}
+.profile-right-bar .title {
+  font-size: 2.4rem;
+  font-weight: 500;
+}
+.profile-right-bar .profile-info {
+  font-size: 1.6rem;
+  font-weight: normal;
+  display: flex;
+  justify-content: space-between;
+}
+.profile-friends {
+  margin-top: 3rem;
+}
+.profile-friends h2 {
+  font-size: 2.4rem;
+  font-weight: 500;
+  margin-bottom: 1rem;
+}
+.profile-friends-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+.profile-friend-list-item img {
+  width: 12rem;
+  height: 10rem;
+  object-fit: cover;
+}
+.profile-friend-list-item p {
+  font-size: 1.6rem;
+  font-weight: normal;
+}
