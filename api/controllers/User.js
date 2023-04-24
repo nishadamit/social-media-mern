@@ -20,6 +20,27 @@ const register = async (req, res) => {
   }
 };
 
+const login = async (req, res) => {
+  const { email, password } = req.body;
+  const user = await userModel.findOne({ email });
+
+  if (!user) {
+    return res
+      .status(400)
+      .json({ success: false, message: "User does not exits" });
+  }
+
+  const isMatch = await user.matchPassword(password);
+  if (!isMatch) {
+    return res
+      .status(400)
+      .json({ success: false, message: "email or password is incorrect" });
+  }
+  const token = await user.generateToken();
+  res.status(200).json({ success: true, message: "Login Successfuly", token });
+};
+
 module.exports = {
   register,
+  login,
 };
