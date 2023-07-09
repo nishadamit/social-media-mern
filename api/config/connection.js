@@ -7,6 +7,7 @@ exports.connection = function () {
       console.log("database connected successfully");
     })
     .catch(() => {
+      console.log("database connection failed");
       console.log(console.error());
     });
 };
