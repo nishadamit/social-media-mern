@@ -116,10 +116,16 @@ const followAndunfollow = async (req, res) => {
       (follow) => follow.toString() !== currentUser._id.toString()
     );
     await user.save();
+    currentUser.followings = currentUser.followings.filter(
+      (following) => following.toString() !== req.params.id.toString()
+    );
+    await currentUser.save();
     msg = "User Unfollowed Successfully";
   } else {
     user.followers.push(currentUser._id);
     await user.save();
+    currentUser.followings.push(req.params.id);
+    await currentUser.save();
     msg = "User Followed Successfully";
   }
 
