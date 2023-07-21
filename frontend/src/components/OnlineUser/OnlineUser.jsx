@@ -2,12 +2,13 @@ import React from "react";
 import "./OnlineUser.css";
 
 const OnlineUser = ({ user }) => {
+  const PF = process.env.REACT_APP_PUBLIC_FOLDER;
   return (
     <li>
       <div className="list-item">
         <div className="image-container">
           <img
-            src={user?.profilePicture}
+            src={`${PF}${user?.profilePicture}`}
             alt="online friend"
             className="round-image-4"
           />

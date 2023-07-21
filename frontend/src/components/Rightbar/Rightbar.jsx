@@ -4,10 +4,12 @@ import { Users } from "../../dummyData";
 import OnlineUser from "../OnlineUser/OnlineUser";
 
 const HomeRightBar = () => {
+  const PF = process.env.REACT_APP_PUBLIC_FOLDER;
+
   return (
     <>
       <div className="birthday-container">
-        <img src="assets/gift.png" alt="gift" />
+        <img src={`${PF}/gift.png`} alt="gift" />
         <p>
           <strong>Pola foster</strong> and <strong>3 other friends</strong> have
           birthday today.
@@ -27,6 +29,8 @@ const HomeRightBar = () => {
 };
 
 const ProfileRightBar = () => {
+  const PF = process.env.REACT_APP_PUBLIC_FOLDER;
+
   return (
     <div>
       <div className="profile-right-bar">
@@ -49,7 +53,7 @@ const ProfileRightBar = () => {
         <div className="profile-friends-list">
           {Users.map((friend) => (
             <div className="profile-friend-list-item" key={friend?.id}>
-              <img src={friend?.profilePicture} alt="profile pic" />
+              <img src={`${PF}${friend?.profilePicture}`} alt="profile pic" />
               <p>{friend?.username}</p>
             </div>
           ))}

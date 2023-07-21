@@ -1,3 +1,4 @@
+const { json } = require("express");
 const userModel = require("../models/User");
 
 const register = async (req, res) => {
@@ -65,6 +66,17 @@ const logout = async (req, res) => {
     res.status(400).json({ success: false, message: error.message });
   }
 };
+
+const getUser = async( req,res ) =>{
+  try {
+    const { id } = req.params;
+    const user = await userModel.findById(id);
+    res.status(200).json({success: true, message: "User details fetched successfully", user})
+  } catch (error) {
+    res.status(400).json({ success: false, message: error.message });
+  }
+
+}
 
 const updateUser = async (req, res) => {
   const updates = Object.keys(req.body);
@@ -137,6 +149,7 @@ module.exports = {
   login,
   getAllUsers,
   logout,
+  getUser,
   updateUser,
   deleteUser,
   followAndunfollow,

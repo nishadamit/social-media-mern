@@ -1,44 +1,55 @@
-import React, { useState } from "react";
+import React, { useState , useEffect } from "react";
 import "./Post.css";
 import { MoreVert } from "@mui/icons-material";
-import { Users } from "../../dummyData";
+import { format } from 'timeago.js';
+import API from "../../constants/api";
 
 const Post = ({ post }) => {
-  const user = Users.find((item) => item?.id === post?.id);
-  const [like, setLike] = useState(post?.like);
+  const [user, setUser] = useState({});
+  const [like, setLike] = useState(post?.likes?.length);
   const [isLiked, setIsLiked] = useState(false);
+
+  const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 
   const likeHandler = () => {
     setLike(isLiked ? like - 1 : like + 1);
     setIsLiked(!isLiked);
   };
+
+  useEffect(() =>{
+    const fetchUser = async () =>{
+      const res = await API.get(`/users/${post?.userId}`);
+      setUser(res?.data?.user)
+    }
+    fetchUser();
+  },[])
   return (
     <div className="post">
       <div className="post-wrapper">
         <div className="post-header">
           <div className="post-header-details">
             <img
-              src={user?.profilePicture}
+              src={user?.profilePicture || `${PF}person/noAvatar.png`}
               alt="post-by"
               className="round-image-2"
             />
             <span className="post-by-name">{user?.username}</span>
-            <span className="post-by-time">{post?.date}</span>
+            <span className="post-by-time">{format(post?.createdAt)}</span>
           </div>
           <MoreVert />
         </div>
         <p className="post-description-text">{post?.desc}</p>
-        <img src={post?.photo} alt="" className="post-main-image" />
+        <img src={`${PF}${post?.img}`} alt="" className="post-main-image" />
         <div className="post-footer">
           <div className="post-footer-left">
             <img
-              src="assets/like.png"
+              src={`${PF}like.png`}
               alt="like-button"
               className="round-image-2"
               onClick={likeHandler}
             />
             <img
-              src="assets/heart.png"
+              src={`${PF}heart.png`}
               alt="heart-button"
               className="round-image-2"
               onClick={likeHandler}

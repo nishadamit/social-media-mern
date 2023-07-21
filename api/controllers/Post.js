@@ -85,7 +85,7 @@ const getTimeline = async(req,res) =>{
   try {
     let posts = [];
     let friendPosts = [];
-    const { userId } = req.body;
+    const { userId } = req.params;
     const currentUser = await userModel.find({_id: userId});
     const currentUserPosts = await postModel.find({userId: userId});
     if(currentUser[0].followings.length !== 0){
@@ -96,7 +96,7 @@ const getTimeline = async(req,res) =>{
       console.log(friendPosts)
     }
 
-    posts = [...currentUserPosts, ...friendPosts]
+    posts = [...currentUserPosts, ...friendPosts[0]]
 
     res.status(200).json({success: true, message:"Timeline fetched successfully!",posts})
   } catch (error) {

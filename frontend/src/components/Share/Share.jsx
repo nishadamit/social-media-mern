@@ -3,11 +3,12 @@ import { PermMedia, Label, Room, EmojiEmotions } from "@mui/icons-material";
 import "./Share.css";
 
 const Share = () => {
+  const PF = process.env.REACT_APP_PUBLIC_FOLDER;
   return (
     <div className="share-container">
       <div className="share-container-wrapper">
         <div className="share-top">
-          <img src="assets/person/1.jpeg" alt="" className="round-image-3" />
+          <img src={`${PF}person/1.jpeg`} alt="" className="round-image-3" />
           <input
             className="share-top-input-box"
             placeholder="What's on your mind, Amit?"

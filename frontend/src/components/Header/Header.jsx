@@ -1,13 +1,17 @@
 import React from "react";
 import { Search, Person, Message, Notifications } from "@mui/icons-material";
-// import {}
+import { Link } from 'react-router-dom';
 import "./Header.css";
 
 const Header = () => {
+  const PF = process.env.REACT_APP_PUBLIC_FOLDER;
+
   return (
     <div className="header-container">
       <div className="header-left">
+        <Link to="/" style={{textDecoration: 'none'}}>
         <span>Connect Social</span>
+        </Link>
       </div>
       <div className="header-middle">
         <Search className="search-icon" />
@@ -34,7 +38,7 @@ const Header = () => {
         </div>
         <div className="profile-image-container">
           <img
-            src="assets/person/1.jpeg"
+            src={`${PF}person/1.jpeg`}
             alt="profile pic"
             className="round-image-3"
           />
