@@ -2,6 +2,7 @@ import React, { useState , useEffect } from "react";
 import "./Post.css";
 import { MoreVert } from "@mui/icons-material";
 import { format } from 'timeago.js';
+import { Link } from "react-router-dom";
 import API from "../../constants/api";
 
 const Post = ({ post }) => {
@@ -28,11 +29,13 @@ const Post = ({ post }) => {
       <div className="post-wrapper">
         <div className="post-header">
           <div className="post-header-details">
-            <img
-              src={user?.profilePicture || `${PF}person/noAvatar.png`}
-              alt="post-by"
-              className="round-image-2"
-            />
+            <Link to={`profile/${user?.username}`}>
+                <img
+                  src={user?.profilePicture || `${PF}person/noAvatar.png`}
+                  alt="post-by"
+                  className="round-image-2"
+                />
+            </Link>
             <span className="post-by-name">{user?.username}</span>
             <span className="post-by-time">{format(post?.createdAt)}</span>
           </div>

@@ -51,3 +51,7 @@
 .profile-container-bottom-right {
   flex: 3;
 }
+
+.text-red{
+  color: red;
+}

@@ -49,6 +49,16 @@ const userSchema = mongoose.Schema(
         },
       },
     ],
+    city:{
+      type: String
+    },
+    from:{
+      type: String
+    },
+    realationship:{
+      type: String,
+      default: 'single'
+    }
   },
   { timestamps: true }
 );

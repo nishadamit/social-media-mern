@@ -80,6 +80,7 @@ const getPost = async(req,res) =>{
     res.status(400).json({ success: false, message: error.message });
   }
 }
+
 // get timeline post
 const getTimeline = async(req,res) =>{
   try {
@@ -89,16 +90,25 @@ const getTimeline = async(req,res) =>{
     const currentUser = await userModel.find({_id: userId});
     const currentUserPosts = await postModel.find({userId: userId});
     if(currentUser[0].followings.length !== 0){
-      console.log("called")
       friendPosts = await Promise.all(currentUser[0].followings.map((friend) => {
        return postModel.find({userId: friend})
       }))
-      console.log(friendPosts)
     }
 
     posts = [...currentUserPosts, ...friendPosts[0]]
 
     res.status(200).json({success: true, message:"Timeline fetched successfully!",posts})
+  } catch (error) {
+    res.status(400).json({ success: false, message: error.message });
+  }
+}
+
+// get timeline post
+const getAllUsersPost = async(req,res) =>{
+  try {
+    const { userId } = req.params;
+    const posts = await postModel.find({ userId});
+    res.status(200).json({success: true, message:"Users posts fetched successfully!",posts})
   } catch (error) {
     res.status(400).json({ success: false, message: error.message });
   }
@@ -110,5 +120,6 @@ module.exports = {
   deletePost,
   likeOrUnlikePost,
   getPost,
-  getTimeline
+  getTimeline,
+  getAllUsersPost
 };
