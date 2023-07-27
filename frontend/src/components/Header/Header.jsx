@@ -1,10 +1,16 @@
 import React from "react";
-import { Search, Person, Message, Notifications } from "@mui/icons-material";
-import { Link } from 'react-router-dom';
+import { Search, Person, Message, Notifications ,} from "@mui/icons-material";
+import { Link, useNavigate } from 'react-router-dom';
 import "./Header.css";
 
 const Header = () => {
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
+  const navigate = useNavigate()
+
+  const logout = () =>{
+    localStorage.setItem("loginData","");
+    navigate('/login')
+  }
 
   return (
     <div className="header-container">
@@ -42,6 +48,9 @@ const Header = () => {
             alt="profile pic"
             className="round-image-3"
           />
+        </div>
+        <div>
+          <button onClick={logout}>Logout</button>
         </div>
       </div>
     </div>

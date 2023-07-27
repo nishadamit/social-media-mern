@@ -1,4 +1,5 @@
 import React, { useState, useContext } from "react";
+import { CircularProgress } from '@mui/material';
 import { login } from "../services/login";
 import { AuthContext } from "../../context/AuthContext";
 import "./Login.css";
@@ -7,16 +8,12 @@ const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const { user, error, isFetching, dispatch } = useContext(AuthContext);
+  const { isFetching, dispatch } = useContext(AuthContext);
   const handleOnSubmit = (e) =>{
         e.preventDefault();
-        console.log("called")
-        login({email, password}, dispatch)
-        // console.log("email",email);
-        // console.log("password", password);
+        login({email, password}, dispatch);
   }
 
-  console.log("user",user)
   return (
     <div className="login">
       <div className="login-wrapper">
@@ -36,7 +33,9 @@ const Login = () => {
                 placeholder="Password" 
                 onChange={e => setPassword(e?.target?.value)}
             />
-            <button className="login-button" type="submit">Log In</button>
+            <button className="login-button" type="submit">
+              {isFetching ? <CircularProgress size={15} sx={{color: "#fff"}}/> : 'Log In'}
+            </button>
             <p className="forgot-password">Forgot password?</p>
             <button className="register-button">Create a New Account</button>
           </form>
