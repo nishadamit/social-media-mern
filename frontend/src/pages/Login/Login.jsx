@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { login } from "../services/login";
 import { AuthContext } from "../../context/AuthContext";
 import "./Login.css";
+import {Swl} from "../../components/Swl";
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -17,8 +18,8 @@ const Login = () => {
   }
 
   const handleOnSubmit = (e) =>{
-        e.preventDefault();
-        login({email, password}, dispatch, navigateToHome);
+      e.preventDefault();
+      login({email, password}, dispatch, navigateToHome);
   }
 
 

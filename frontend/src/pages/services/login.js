@@ -1,4 +1,5 @@
 import API from "../../constants/api";
+import { Swl } from "../../components/Swl";
 
 export const login = async(credentials, dispatch,navigateToHome) =>{
      dispatch({type: 'LOGIN_START'});
@@ -8,5 +9,10 @@ export const login = async(credentials, dispatch,navigateToHome) =>{
         navigateToHome();
      } catch (error) {
         dispatch({ type: 'LOGIN_FAILURE', payload: error});
+        console.log(error)
+        Swl.fire({
+         icon: 'error',
+         title: error?.response?.data?.message,
+        })
      }
 }

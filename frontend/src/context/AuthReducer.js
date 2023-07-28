@@ -5,21 +5,20 @@ export const AuthReducer = (state, action) =>{
                 user: null,
                 isFetching: true,
                 error: false,
-        };
+            };
         case 'LOGIN_SUCCESS':
-            // console.log("action payload", action.payload);
             localStorage.setItem("loginData", JSON.stringify(action.payload));
             return{
                 user: action.payload,
                 isFetching: false,
                 error: false,
-        };
+            };
         case 'LOGIN_FAILURE':
             return{
                 user: null,
                 isFetching: false,
                 error: action.payload,
-        };
+            };
         default:
             return state
     }
