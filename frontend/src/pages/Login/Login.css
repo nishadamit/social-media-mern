@@ -41,10 +41,15 @@
   gap: 2rem;
   align-items: center;
 }
-.login-right form .forgot-password {
+.login-right form a {
   font-size: 1.6rem;
   font-weight: normal;
   cursor: pointer;
+  text-decoration: none;
+  color: #555;
+}
+.login-right form a:active {
+  color: #555;
 }
 .login-right form input {
   border: none;
