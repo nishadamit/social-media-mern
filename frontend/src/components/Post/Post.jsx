@@ -19,8 +19,12 @@ const Post = ({ post }) => {
 
   useEffect(() =>{
     const fetchUser = async () =>{
-      const res = await API.get(`/users/${post?.userId}`);
-      setUser(res?.data?.user)
+      try {
+        const res = await API.get(`/users/${post?.userId}`);
+        setUser(res?.data?.user)
+      } catch (error) {
+        console.error(error)
+      }
     }
     fetchUser();
   },[])
@@ -31,7 +35,7 @@ const Post = ({ post }) => {
           <div className="post-header-details">
             <Link to={`profile/${user?.username}`}>
                 <img
-                  src={user?.profilePicture || `${PF}person/noAvatar.png`}
+                  src={user?.profilePicture ? `${PF}${user?.profilePicture}` : `${PF}person/noAvatar.png`}
                   alt="post-by"
                   className="round-image-2"
                 />

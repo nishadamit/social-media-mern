@@ -4,7 +4,6 @@ import { Outlet, Navigate } from 'react-router-dom';
 const ProtectedRoutes = () => {
     const isLoggedIn = () =>{
         const loginData = localStorage.getItem("loginData");
-        console.log("loginData",loginData)
         if(loginData) 
           return true
         else 
