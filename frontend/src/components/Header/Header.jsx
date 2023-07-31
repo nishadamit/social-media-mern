@@ -2,14 +2,22 @@ import React from "react";
 import { Search, Person, Message, Notifications ,} from "@mui/icons-material";
 import { Link, useNavigate } from 'react-router-dom';
 import "./Header.css";
+import API from "../../constants/api";
 
 const Header = () => {
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
   const navigate = useNavigate()
 
-  const logout = () =>{
-    localStorage.setItem("loginData","");
-    navigate('/login')
+  const logout = async() =>{
+    try {
+      const response = await API.post("/users/logout");
+      if(response?.data?.success){
+        localStorage.clear();
+        navigate('/login')
+      }
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   return (

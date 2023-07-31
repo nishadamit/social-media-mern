@@ -5,9 +5,9 @@ const getToken = () =>{
     let data = localStorage.getItem('loginData');
     if(data){
         accessToken = JSON.parse(data)?.token;
+        return accessToken
     }
 }
-getToken();
 
 
 const api =  axios.create({
@@ -15,7 +15,7 @@ const api =  axios.create({
 })
 
 api.interceptors.request.use((request) =>{
-    request.headers.authorization = `Bearer ${accessToken}`;
+    request.headers.authorization = `Bearer ${getToken()}`;
     return request;
   },(error) =>{
     return Promise.reject(error)

@@ -54,7 +54,6 @@ const deletePost = async (req, res) => {
 
 // like a post
 const likeOrUnlikePost = async (req, res) => {
-  console.log("liked called")
   const { id } = req.params;
   const userId = req.user._id;
   try {
@@ -93,9 +92,11 @@ const getTimeline = async(req,res) =>{
       friendPosts = await Promise.all(currentUser[0].followings.map((friend) => {
        return postModel.find({userId: friend})
       }))
+      posts = currentUserPosts.concat(friendPosts[0]);
+    }else{
+      posts = currentUserPosts;
     }
 
-    posts = [...currentUserPosts, ...friendPosts[0]]
 
     res.status(200).json({success: true, message:"Timeline fetched successfully!",posts})
   } catch (error) {

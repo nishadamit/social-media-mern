@@ -1,4 +1,3 @@
-const { json } = require("express");
 const userModel = require("../models/User");
 
 const register = async (req, res) => {
@@ -34,16 +33,13 @@ const login = async (req, res) => {
     }
 
     const isMatch = await user.matchPassword(password);
-    console.log("isMatch", isMatch);
     if (!isMatch) {
       return res
         .status(400)
-        .json({ success: false, message: "email or password is incorrect" });
+        .json({ success: false, message: "Email or Password is incorrect" });
     }
     const token = await user.generateToken();
-    res
-      .status(200)
-      .json({ success: true, message: "Login Successfuly", token });
+    res.status(200).json({ success: true, message: "Login Successfuly", token, user });
   } catch (error) {
     res.status(400).json({ success: false, message: error.message });
   }
@@ -60,7 +56,7 @@ const getAllUsers = async (req, res) => {
 
 const logout = async (req, res) => {
   try {
-    req.user.tokens = [];
+    req.user.tokens = req.user.tokens?.filter((token) => token.token !== req.token);
     await req.user.save();
     res.status(200).json({ success: true, message: "Logout successfully!" });
   } catch (error) {

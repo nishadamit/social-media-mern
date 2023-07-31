@@ -18,7 +18,7 @@ router.put("/update/:id", auth, updatePost);
 router.delete("/delete/:id", auth, deletePost);
 router.put("/likeOrunlike/:id", auth, likeOrUnlikePost);
 router.get("/post/:id", auth, getPost);
-router.get("/timeline/:userId", getTimeline);
-router.get("/profile/allpost/:userId", getAllUsersPost);
+router.get("/timeline/:userId",auth, getTimeline);
+router.get("/profile/allpost/:userId",auth, getAllUsersPost);
 
 module.exports = router;

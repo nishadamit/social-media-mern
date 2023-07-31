@@ -12,9 +12,16 @@ const Post = ({ post }) => {
 
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 
-  const likeHandler = () => {
-    setLike(isLiked ? like - 1 : like + 1);
-    setIsLiked(!isLiked);
+  const likeHandler = async() => {
+
+    try {
+      const response = await API.put(`/posts/likeOrunlike/${post._id}`);
+    } catch (error) {
+      
+    }
+
+    // setLike(isLiked ? like - 1 : like + 1);
+    // setIsLiked(!isLiked);
   };
 
   useEffect(() =>{
@@ -27,7 +34,9 @@ const Post = ({ post }) => {
       }
     }
     fetchUser();
-  },[])
+  },[]);
+
+
   return (
     <div className="post">
       <div className="post-wrapper">
