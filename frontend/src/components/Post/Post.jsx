@@ -13,15 +13,13 @@ const Post = ({ post }) => {
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 
   const likeHandler = async() => {
-
     try {
-      const response = await API.put(`/posts/likeOrunlike/${post._id}`);
+      await API.put(`/posts/likeOrunlike/${post._id}`);
+      setLike(isLiked ? like - 1 : like + 1);
+      setIsLiked(!isLiked);
     } catch (error) {
-      
+      console.error(error);
     }
-
-    // setLike(isLiked ? like - 1 : like + 1);
-    // setIsLiked(!isLiked);
   };
 
   useEffect(() =>{
@@ -34,7 +32,11 @@ const Post = ({ post }) => {
       }
     }
     fetchUser();
-  },[]);
+  },[post?.userId]);
+
+  useEffect(() =>{
+      setIsLiked(post?.likes?.includes(user?._id));
+  },[user?._id, post?.likes])
 
 
   return (
