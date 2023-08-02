@@ -12,19 +12,23 @@ const Share = () => {
 
   const handleOnSubmit = async(e) =>{
        e.preventDefault();
-       const data = {
-           userId: user?._id,
-           desc,
-           img: "post/1.jpeg"
-       }
 
+       let data = new FormData();
+       const fileName = `${Date.now()}-${file.name}`;
+       data.append('img', fileName);
+       data.append('desc',desc);
+       data.append('userId', user?._id);
+       data.append('postImage', file);
        try {
         const response =  await API.post('/posts/create', data);
-        console.log(response);
+        if(response.data.success){
+          window.location.reload();
+        }
        } catch (error) {
         console.error(error)
        }
   }
+
   return (
     <div className="share-container">
       <div className="share-container-wrapper">
