@@ -87,10 +87,10 @@ const getTimeline = async(req,res) =>{
     let friendPosts = [];
     const { userId } = req.params;
     const currentUser = await userModel.find({_id: userId});
-    const currentUserPosts = await postModel.find({userId: userId});
+    const currentUserPosts = await postModel.find({userId: userId}).sort({createdAt: -1});
     if(currentUser[0].followings.length !== 0){
       friendPosts = await Promise.all(currentUser[0].followings.map((friend) => {
-       return postModel.find({userId: friend})
+       return postModel.find({userId: friend}).sort({createdAt: -1})
       }))
       posts = currentUserPosts.concat(friendPosts[0]);
     }else{

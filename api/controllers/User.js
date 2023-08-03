@@ -106,39 +106,65 @@ const deleteUser = async (req, res) => {
 };
 
 const followAndunfollow = async (req, res) => {
-  let msg = "";
-  if (req.params.id.toString() === req.user._id.toString()) {
-    res
-      .status(400)
-      .json({ success: true, message: "You cannot follow yourself" });
+  try {
+      let msg = "";
+      if (req.params.id.toString() === req.user._id.toString()) {
+        res
+          .status(400)
+          .json({ success: true, message: "You cannot follow yourself" });
+      }
+
+      const user = await userModel.findById(req.params.id);
+      const currentUser = req.user;
+      let alreadyFollowed = user.followers.find(
+        (follow) => follow.toString() === currentUser._id.toString()
+      );
+
+      if (alreadyFollowed) {
+        user.followers = user.followers.filter(
+          (follow) => follow.toString() !== currentUser._id.toString()
+        );
+        await user.save();
+        currentUser.followings = currentUser.followings.filter(
+          (following) => following.toString() !== req.params.id.toString()
+        );
+        await currentUser.save();
+        msg = "User Unfollowed Successfully";
+      } else {
+        user.followers.push(currentUser._id);
+        await user.save();
+        currentUser.followings.push(req.params.id);
+        await currentUser.save();
+        msg = "User Followed Successfully";
+      }
+      return res.status(200).json({ success: true, message: msg });
+  } catch (error) {
+      res.status(400).json({ success: false, message: error.message });
   }
-
-  const user = await userModel.findById(req.params.id);
-  const currentUser = req.user;
-  let alreadyFollowed = user.followers.find(
-    (follow) => follow.toString() === currentUser._id.toString()
-  );
-
-  if (alreadyFollowed) {
-    user.followers = user.followers.filter(
-      (follow) => follow.toString() !== currentUser._id.toString()
-    );
-    await user.save();
-    currentUser.followings = currentUser.followings.filter(
-      (following) => following.toString() !== req.params.id.toString()
-    );
-    await currentUser.save();
-    msg = "User Unfollowed Successfully";
-  } else {
-    user.followers.push(currentUser._id);
-    await user.save();
-    currentUser.followings.push(req.params.id);
-    await currentUser.save();
-    msg = "User Followed Successfully";
-  }
-
-  return res.status(200).json({ success: true, message: msg });
 };
+
+const userFriends = async (req, res) =>{
+        console.log("======================")
+    // try {
+    //   console.log("+=====================")
+    //   console.log(req.user)
+    //   if(req.user.followings.length !== 0){
+    //       const friends = await Promise.all(req?.user?.followings.map((friendId)=>{
+    //         return userModel.findById(friendId)
+    //       }))
+    //       let friendList = friends.map((friend) =>{
+    //         const {_id, username, profilePicture} = friend;
+    //         return {_id, username, profilePicture}
+    //       })
+    //       res.status(200).json({success: true,message:"FriendList fetched successfully", friendList})
+    //   }else{
+    //       res.status(200).json({success: true,message:"FriendList fetched successfully", friendList:[]})
+    //   }
+
+    // } catch (error) {
+    //   res.status(400).json({ success: false, message: error.message });
+    // }
+}
 
 module.exports = {
   register,
@@ -149,4 +175,5 @@ module.exports = {
   updateUser,
   deleteUser,
   followAndunfollow,
+  userFriends
 };

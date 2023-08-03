@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./Rightbar.css";
 import { Users } from "../../dummyData";
 import OnlineUser from "../OnlineUser/OnlineUser";
+import API from '../../constants/api';
 
 const HomeRightBar = () => {
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
@@ -30,6 +31,18 @@ const HomeRightBar = () => {
 
 const ProfileRightBar = () => {
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
+
+  useEffect(() =>{
+     const fetchFriends = async() =>{
+          try {
+            const response = await API.get('/users/friends');
+            console.log("friends", response.data);
+          } catch (error) {
+            console.error(error)
+          }
+     }
+     fetchFriends();
+  },[])
 
   return (
     <div>

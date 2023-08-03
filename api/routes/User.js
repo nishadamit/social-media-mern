@@ -10,6 +10,7 @@ const {
   updateUser,
   deleteUser,
   followAndunfollow,
+  userFriends
 } = require("../controllers/User");
 const auth = require("../middlewares/auth");
 
@@ -21,5 +22,6 @@ router.post("/logout", auth, logout);
 router.put("/update/:id", auth, updateUser);
 router.delete("/deleteuser/:id", auth, deleteUser);
 router.put("/followAndunfollow/:id", auth, followAndunfollow);
+router.get('/friends', auth, userFriends);
 
 module.exports = router;
