@@ -1,13 +1,12 @@
-import React,{ useContext, useEffect, useState } from "react";
+import React,{useEffect, useState } from "react";
 import "./Feed.css";
 import Share from "../Share/Share";
 import Post from "../Post/Post";
 import API from "../../constants/api";
-import { AuthContext } from "../../context/AuthContext";
 import { getUserDetails } from "../../utils/user";
 import NoDataComponent from "../NoDataComponent";
 
-const Feed = ({profile = false}) => {
+const Feed = ({profile = false, userId}) => {
   const [posts, setPosts] = useState([]);
   const { _id } = getUserDetails();
   useEffect(() =>{
@@ -22,7 +21,7 @@ const Feed = ({profile = false}) => {
 
     const fetchUsersAllPost = async () =>{
       try {
-        const res = await API.get(`/posts/profile/allpost/${_id}`);
+        const res = await API.get(`/posts/profile/allpost/${userId}`);
         setPosts(res?.data?.posts);
       } catch (error) {
         console.log(error)

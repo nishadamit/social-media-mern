@@ -44,7 +44,7 @@ const Post = ({ post }) => {
       <div className="post-wrapper">
         <div className="post-header">
           <div className="post-header-details">
-            <Link to={`profile/${user?.username}`}>
+            <Link to={`profile/${user?.username}`} state={{id: user?._id}}>
                 <img
                   src={user?.profilePicture ? `${PF}${user?.profilePicture}` : `${PF}person/noAvatar.png`}
                   alt="post-by"

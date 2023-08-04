@@ -3,6 +3,7 @@ import "./Rightbar.css";
 import { Users } from "../../dummyData";
 import OnlineUser from "../OnlineUser/OnlineUser";
 import API from '../../constants/api';
+import { Link } from "react-router-dom";
 
 const HomeRightBar = () => {
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
@@ -66,10 +67,12 @@ const ProfileRightBar = () => {
         <h2>User friends</h2>
         <div className="profile-friends-list">
           {friends?.map((friend, index) => (
+          <Link key={index} to={`/profile/${friend?.username}`} state={{id: friend?._id}}>
             <div className="profile-friend-list-item" key={index}>
               <img src={friend?.profilePicture ? `${PF}${friend?.profilePicture}` :  `${PF}person/noAvatar.png`} alt="profile pic" />
               <p>{friend?.username}</p>
             </div>
+          </Link>
           ))}
         </div>
       </div>
