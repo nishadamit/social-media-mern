@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./Rightbar.css";
 import { Users } from "../../dummyData";
 import OnlineUser from "../OnlineUser/OnlineUser";
@@ -30,18 +30,19 @@ const HomeRightBar = () => {
 };
 
 const ProfileRightBar = () => {
+  const [friends, setFriends] = useState([]);
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 
   useEffect(() =>{
-     const fetchFriends = async() =>{
+      const fetchUserFriends = async () =>{
           try {
-            const response = await API.get('/users/friends');
-            console.log("friends", response.data);
+            const response = await API.get("/users/friends");
+            setFriends(response?.data?.friendList);
           } catch (error) {
             console.error(error)
           }
-     }
-     fetchFriends();
+      }
+      fetchUserFriends();
   },[])
 
   return (
@@ -64,9 +65,9 @@ const ProfileRightBar = () => {
       <div className="profile-friends">
         <h2>User friends</h2>
         <div className="profile-friends-list">
-          {Users.map((friend) => (
-            <div className="profile-friend-list-item" key={friend?.id}>
-              <img src={`${PF}${friend?.profilePicture}`} alt="profile pic" />
+          {friends?.map((friend, index) => (
+            <div className="profile-friend-list-item" key={index}>
+              <img src={friend?.profilePicture ? `${PF}${friend?.profilePicture}` :  `${PF}person/noAvatar.png`} alt="profile pic" />
               <p>{friend?.username}</p>
             </div>
           ))}
@@ -77,6 +78,7 @@ const ProfileRightBar = () => {
 };
 
 const Rightbar = ({ profile }) => {
+
   return (
     <div className="rightbar">
       <div className="right-bar-wrapper">

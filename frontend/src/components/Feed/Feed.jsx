@@ -38,7 +38,7 @@ const Feed = ({profile = false}) => {
 
   return (
     <div className="feed-container">
-      <Share />
+      {!profile && <Share />}
       {
         posts.length === 0 ?
         <NoDataComponent 

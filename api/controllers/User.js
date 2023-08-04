@@ -143,27 +143,26 @@ const followAndunfollow = async (req, res) => {
   }
 };
 
-const userFriends = async (req, res) =>{
-        console.log("======================")
-    // try {
-    //   console.log("+=====================")
-    //   console.log(req.user)
-    //   if(req.user.followings.length !== 0){
-    //       const friends = await Promise.all(req?.user?.followings.map((friendId)=>{
-    //         return userModel.findById(friendId)
-    //       }))
-    //       let friendList = friends.map((friend) =>{
-    //         const {_id, username, profilePicture} = friend;
-    //         return {_id, username, profilePicture}
-    //       })
-    //       res.status(200).json({success: true,message:"FriendList fetched successfully", friendList})
-    //   }else{
-    //       res.status(200).json({success: true,message:"FriendList fetched successfully", friendList:[]})
-    //   }
+const getUserFriends = async (req, res) =>{
+    try {
+      console.log("+=====================")
+      console.log("user",req.user)
+      if(req.user.followings.length !== 0){
+          const friends = await Promise.all(req?.user?.followings.map((friendId)=>{
+            return userModel.findById(friendId)
+          }))
+          let friendList = friends.map((friend) =>{
+            const {_id, username, profilePicture} = friend;
+            return {_id, username, profilePicture}
+          })
+          res.status(200).json({success: true,message:"FriendList fetched successfully", friendList})
+      }else{
+          res.status(200).json({success: true,message:"FriendList fetched successfully", friendList:[]})
+      }
 
-    // } catch (error) {
-    //   res.status(400).json({ success: false, message: error.message });
-    // }
+    } catch (error) {
+      res.status(400).json({ success: false, message: error.message });
+    }
 }
 
 module.exports = {
@@ -175,5 +174,5 @@ module.exports = {
   updateUser,
   deleteUser,
   followAndunfollow,
-  userFriends
+  getUserFriends
 };

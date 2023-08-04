@@ -10,10 +10,12 @@ const {
   updateUser,
   deleteUser,
   followAndunfollow,
-  userFriends
+  getUserFriends
 } = require("../controllers/User");
 const auth = require("../middlewares/auth");
 
+
+router.get("/friends", auth, getUserFriends)
 router.post("/register", register);
 router.post("/login", login);
 router.get("/all", auth, getAllUsers);
@@ -22,6 +24,5 @@ router.post("/logout", auth, logout);
 router.put("/update/:id", auth, updateUser);
 router.delete("/deleteuser/:id", auth, deleteUser);
 router.put("/followAndunfollow/:id", auth, followAndunfollow);
-router.get('/friends', auth, userFriends);
 
 module.exports = router;
