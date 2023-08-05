@@ -145,10 +145,10 @@ const followAndunfollow = async (req, res) => {
 
 const getUserFriends = async (req, res) =>{
     try {
-      console.log("+=====================")
-      console.log("user",req.user)
-      if(req.user.followings.length !== 0){
-          const friends = await Promise.all(req?.user?.followings.map((friendId)=>{
+      const {id} = req.params;
+      const user = await userModel.findById(id);
+      if(user.followings.length !== 0){
+          const friends = await Promise.all(user?.followings.map((friendId)=>{
             return userModel.findById(friendId)
           }))
           let friendList = friends.map((friend) =>{

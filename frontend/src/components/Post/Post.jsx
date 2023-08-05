@@ -44,12 +44,12 @@ const Post = ({ post }) => {
       <div className="post-wrapper">
         <div className="post-header">
           <div className="post-header-details">
-            <Link to={`profile/${user?.username}`} state={{id: user?._id}}>
-                <img
-                  src={user?.profilePicture ? `${PF}${user?.profilePicture}` : `${PF}person/noAvatar.png`}
-                  alt="post-by"
-                  className="round-image-2"
-                />
+            <Link to={`/profile/${user?.username}`} state={{id: user?._id}}>
+              <img
+                src={user?.profilePicture ? `${PF}${user?.profilePicture}` : `${PF}person/noAvatar.png`}
+                alt="post-by"
+                className="round-image-2"
+              />
             </Link>
             <span className="post-by-name">{user?.username}</span>
             <span className="post-by-time">{format(post?.createdAt)}</span>

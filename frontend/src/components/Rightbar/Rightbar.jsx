@@ -4,7 +4,8 @@ import { Users } from "../../dummyData";
 import OnlineUser from "../OnlineUser/OnlineUser";
 import API from '../../constants/api';
 import { Link } from "react-router-dom";
-
+import { Add, Remove } from "@mui/icons-material";
+import { getUserDetails } from "../../utils/user";
 const HomeRightBar = () => {
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 
@@ -30,25 +31,49 @@ const HomeRightBar = () => {
   );
 };
 
-const ProfileRightBar = () => {
+const ProfileRightBar = ({user}) => {
   const [friends, setFriends] = useState([]);
+  const [followed, setFollowed] = useState(false);
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
+  const { _id: loggedInUserId, followings } = getUserDetails();
+  const {_id } = user;
+
+  const handleOnFollow = async() =>{
+        try {
+          const response = await API.put(`/users/followAndunfollow/${_id}`);
+          console.log("response", response);
+        } catch (error) {
+          console.log(error);
+        }
+  }
 
   useEffect(() =>{
       const fetchUserFriends = async () =>{
           try {
-            const response = await API.get("/users/friends");
+            const response = await API.get(`/users/friends/${_id}`);
             setFriends(response?.data?.friendList);
           } catch (error) {
             console.error(error)
           }
       }
-      fetchUserFriends();
-  },[])
+      if(_id){
+        fetchUserFriends();
+      }
+  },[_id])
+
+  useEffect(() =>{
+        setFollowed(followings.includes(_id))
+  },[followings, _id])
+
+  console.log(followed)
 
   return (
     <div>
       <div className="profile-right-bar">
+        {(loggedInUserId !== _id) && <button className="connectbutton" onClick={handleOnFollow}>
+                                        { followed? 'Unfollow' :  'Follow' } 
+                                        { followed? <Remove /> :  <Add /> } 
+                                      </button>}
         <h2 className="title">User Information</h2>
         <div className="profile-info">
           <span>City</span>
@@ -80,12 +105,12 @@ const ProfileRightBar = () => {
   );
 };
 
-const Rightbar = ({ profile }) => {
+const Rightbar = ({ profile, user }) => {
 
   return (
     <div className="rightbar">
       <div className="right-bar-wrapper">
-        {profile ? <ProfileRightBar /> : <HomeRightBar />}
+        {profile ? <ProfileRightBar user={user}/> : <HomeRightBar />}
       </div>
     </div>
   );

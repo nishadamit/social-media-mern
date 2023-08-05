@@ -83,19 +83,19 @@ const getPost = async(req,res) =>{
 // get timeline post
 const getTimeline = async(req,res) =>{
   try {
-    let posts = [];
-    let friendPosts = [];
-    const { userId } = req.params;
-    const currentUser = await userModel.find({_id: userId});
-    const currentUserPosts = await postModel.find({userId: userId}).sort({createdAt: -1});
-    if(currentUser[0].followings.length !== 0){
-      friendPosts = await Promise.all(currentUser[0].followings.map((friend) => {
-       return postModel.find({userId: friend}).sort({createdAt: -1})
-      }))
-      posts = currentUserPosts.concat(friendPosts[0]);
-    }else{
-      posts = currentUserPosts;
-    }
+    let posts = await postModel.find({});
+    // let friendPosts = [];
+    // const { userId } = req.params;
+    // const currentUser = await userModel.find({_id: userId});
+    // const currentUserPosts = await postModel.find({userId: userId}).sort({createdAt: -1});
+    // if(currentUser[0].followings.length !== 0){
+    //   friendPosts = await Promise.all(currentUser[0].followings.map((friend) => {
+    //    return postModel.find({userId: friend}).sort({createdAt: -1})
+    //   }))
+    //   posts = currentUserPosts.concat(friendPosts[0]);
+    // }else{
+    //   posts = currentUserPosts;
+    // }
 
 
     res.status(200).json({success: true, message:"Timeline fetched successfully!",posts})

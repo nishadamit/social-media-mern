@@ -15,7 +15,7 @@ const {
 const auth = require("../middlewares/auth");
 
 
-router.get("/friends", auth, getUserFriends)
+router.get("/friends/:id", auth, getUserFriends)
 router.post("/register", register);
 router.post("/login", login);
 router.get("/all", auth, getAllUsers);

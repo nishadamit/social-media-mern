@@ -6,9 +6,9 @@ import API from "../../constants/api";
 import { getUserDetails } from "../../utils/user";
 import NoDataComponent from "../NoDataComponent";
 
-const Feed = ({profile = false, userId}) => {
+const Feed = ({profile = false, user}) => {
   const [posts, setPosts] = useState([]);
-  const { _id } = getUserDetails();
+  const { _id  } = getUserDetails();
   useEffect(() =>{
     const fetchTimelinePosts = async () =>{
           try {
@@ -21,7 +21,7 @@ const Feed = ({profile = false, userId}) => {
 
     const fetchUsersAllPost = async () =>{
       try {
-        const res = await API.get(`/posts/profile/allpost/${userId}`);
+        const res = await API.get(`/posts/profile/allpost/${user?._id}`);
         setPosts(res?.data?.posts);
       } catch (error) {
         console.log(error)
@@ -29,15 +29,21 @@ const Feed = ({profile = false, userId}) => {
     }
     
     if(profile){
-      fetchUsersAllPost()
+      if(user?._id){
+        fetchUsersAllPost()
+      }
     }else{
-      fetchTimelinePosts();
+      if(_id){
+        fetchTimelinePosts();
+      }
     }
-  },[]);
+  },[user?._id, _id, profile]);
+
+  // console.log(loggedInUser, user)
 
   return (
     <div className="feed-container">
-      {!profile && <Share />}
+      <Share />
       {
         posts.length === 0 ?
         <NoDataComponent 
@@ -46,7 +52,11 @@ const Feed = ({profile = false, userId}) => {
         :
         <div>
           {posts.map((post,index) => (
-              <Post post={post} key={index} />
+              <Post 
+                  post={post} 
+                  key={index}
+                  profile={profile} 
+              />
             ))}
         </div>
       }

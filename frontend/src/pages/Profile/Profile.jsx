@@ -12,6 +12,7 @@ const Profile = () => {
   const [user, setUser] = useState({});
   const { id } = useLocation().state;
 
+
   useEffect(() =>{
     const fetchUser = async () =>{
       const res = await API.get(`/users/${id}`);
@@ -41,16 +42,16 @@ const Profile = () => {
             </div>
             <div className="profile-info-container">
               <h2>{user?.username}</h2>
-              <p>I am software engineer lives in texas</p>
+              <p>{user?.description}</p>
             </div>
             <hr />
           </div>
           <div className="profile-container-bottom">
             <div className="profile-container-bottom-left">
-              <Feed profile={true} userId ={id}/>
+              <Feed profile={true} user ={user}/>
             </div>
             <div className="profile-container-bottom-right">
-              <Rightbar profile={true} userId ={id}/>
+              <Rightbar profile={true} user={user}/>
             </div>
           </div>
         </div>
